@@ -60,6 +60,12 @@ ggsave("area5_seasonal.pdf",
        area5_plot,
        width = 6,
        height = 4)
+
+ggsave("area5_seasonal.png",
+       area5_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
 
 # Area 17
@@ -94,6 +100,12 @@ ggsave("area17_seasonal.pdf",
        area17_plot,
        width = 6,
        height = 4)
+
+ggsave("area17_seasonal.png",
+       area17_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
 
 # Area 11
@@ -128,6 +140,12 @@ ggsave("area11_seasonal.pdf",
        area11_plot,
        width = 6,
        height = 4)
+
+ggsave("area11_seasonal.png",
+       area11_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
 
 
@@ -163,6 +181,12 @@ ggsave("area10_seasonal.pdf",
        area10_plot,
        width = 6,
        height = 4)
+
+ggsave("area10_seasonal.png",
+       area10_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
 
 
@@ -198,6 +222,12 @@ ggsave("area7_seasonal.pdf",
        area7_plot,
        width = 6,
        height = 4)
+
+ggsave("area7_seasonal.png",
+       area7_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
 
 # Area 15
@@ -232,4 +262,10 @@ ggsave("area15_seasonal.pdf",
        area15_plot,
        width = 6,
        height = 4)
+
+ggsave("area15_seasonal.png",
+       area15_plot,
+       width = 6,
+       height = 4,
+       dpi = 300)
 ```
