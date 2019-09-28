@@ -1,0 +1,56 @@
+---
+title: "Creating Seasonal Curves in R"
+author: "Will Simmons"
+date: "9/28/2019"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+
+## Importing and viewing the data
+
+```{r import_data}
+seasonal = read_excel('./data/seasonal_data_tidy.xlsx')
+
+seasonal
+```
+
+## Trying out some curves
+Weʻll be drawing curves for Areas 5, 17, 11, 10, 17, 15
+
+```{r area1_plot, dev='CairoPNG', fig.width = 12}
+index_5 = seasonal$surv_area == 5
+
+area5_plot =
+seasonal[index_5,] %>% 
+  ggplot(aes(x = daynum, y = fourier)) +
+  geom_line(size = 1.7, color = "#BA2D0B", show.legend = FALSE) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = "#BA2D0B"), alpha = 0.2, show.legend = FALSE) + # adding confidence limits
+  
+  ggtitle('Area 5: Chilmari/Kaunia') + 
+  theme_light() +
+  theme(plot.title = element_text(hjust = 0.5)) + # centering title - put in code after main theme
+  
+  # this code sets the axis bounds and removes unnecessary space around plot
+  scale_x_continuous(limits = c(0.5, 366.5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(-1.3, -0.7), expand = c(0, 0)) 
+
+area5_plot
+
+ggsave("area5_seasonal.pdf",
+       area5_plot,
+       width = 6,
+       height = 4)
+```
+
+
