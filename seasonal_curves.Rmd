@@ -14,15 +14,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(tidyverse)
 library(readxl)
+library(here)
 ```
 
 
 ## Importing and viewing the data
 
 ```{r import_data}
-seasonal = read_excel('./data/seasonal_data_tidy.xlsx')
+seasonal = read_excel('./data/seasonal_data_tidy.xlsx')  # was this exported from MATLAB? pretty sure - since did fourier modeling there
 
-seasonal
+area_names <- readRDS(here("data/area_names.rds"))
 ```
 
 ## Trying out some curves
@@ -58,11 +59,13 @@ area5_plot
 
 ggsave("area5_seasonal.pdf",
        area5_plot,
+       path = here("output"),
        width = 6,
        height = 4)
 
 ggsave("area5_seasonal.png",
        area5_plot,
+       path = here("output"),
        width = 6,
        height = 4,
        dpi = 300)
@@ -269,3 +272,53 @@ ggsave("area15_seasonal.png",
        height = 4,
        dpi = 300)
 ```
+
+<!-- Making a function... -->
+
+```{r, include = F}
+
+seasonal_plot <- function(area,
+                          col = wesanderson::wes_palettes[[sample(1:19, 1)]][[sample(1:4, 1)]])  # random color
+
+{
+  
+  seasonal <- read_excel('./data/seasonal_data_tidy.xlsx')  # was this exported from MATLAB? pretty sure - since did fourier modeling there
+  
+  area_names <- readRDS(here("data/area_names.rds"))
+  
+  area_ind <- seasonal$surv_area == area
+  
+  p <- 
+    seasonal[area_ind,] %>% 
+    ggplot(aes(x = daynum, y = fourier)) +
+    geom_line(size = 1.7, color = col, show.legend = FALSE) +
+    geom_ribbon(
+      aes(ymin = lower, ymax = upper),
+      fill = col,
+      alpha = 0.2,
+      show.legend = FALSE
+    ) +
+    ggtitle(area_names[[area,2]]) + 
+    theme_light() +
+    theme(
+      plot.title = element_text(hjust = 0.5),
+      panel.grid.minor = element_blank()
+    ) +
+    scale_x_continuous(
+      breaks = c(1, 32, 61, 92, 122, 153, 183, 214, 245, 275, 306, 336),
+      labels = c('J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'),
+      limits = c(0.5, 366.5),
+      expand = c(0, 0)
+    ) +
+    scale_y_continuous(limits = c(-1.4, -0.55), expand = c(0, 0)) +
+    ylab('Mean Weight-for-Length Z-score') +
+    xlab(NULL)  
+  
+  p
+  
+}
+
+seasonal_plot(area = 4)
+
+```
+
