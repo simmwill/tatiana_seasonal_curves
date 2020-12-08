@@ -1,3 +1,7 @@
+---
+output: github_document
+---
+
 ## Seasonal curves 
 
 Repo contains aggregate, non-identifiable nutrition data from 25 geographic regions (*upazilas*) of Bangladesh. Curves constructed track the "hunger season" noted in literature. One of my research objectives at IRI was to investigate the relationship between seasonal climate and hunger/wasting.
