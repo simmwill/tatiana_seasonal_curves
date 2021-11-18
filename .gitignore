@@ -3,3 +3,12 @@
 .RData
 .Ruserdata
 *files/
+*.eps
+*.png
+*.ai
+*.gif
+*.tif
+*.jpg
+*.pdf
+*.rds
+.DS_Store
