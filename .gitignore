@@ -12,3 +12,4 @@
 *.pdf
 *.rds
 .DS_Store
+*.xlsx
